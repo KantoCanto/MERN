@@ -1,3 +1,6 @@
+//handling .env
+import 'dotenv/config';
+
 //variable that holds the port number
 const PORT = 3000;
 
@@ -17,9 +20,7 @@ app.get("/", (req, res) => {
 
 //connection to the specific flashcardproject db
 //mongoose.connect() is a <promise>
-mongoose.connect(
-  "mongodb+srv://flascardproject:4uavobNvUDT1BkEH@cluster0.u5j5yv9.mongodb.net/?retryWrites=true&w=majority"
-).then(() =>{ 
+mongoose.connect(process.env.MONGO_URL).then(() =>{ 
     console.log(`listening on port ${PORT}`)
     app.listen(PORT);
 })
