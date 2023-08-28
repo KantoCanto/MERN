@@ -7,6 +7,9 @@ const PORT = 3000;
 //importing mongoose
 import mongoose from 'mongoose';
 
+//import cors
+import cors from "cors";
+
 //import the models
 import Deck from "./models/Deck.js";
 
@@ -16,6 +19,8 @@ const app = express();
 
 //express.json() is a middleware function. here we tell express to use this.
 //everytime someone makes a request to our API, it's going to first run wtv this code is
+//use cors to avoid the browser throwing cors errors when running locally
+app.use(cors("*"));
 app.use(express.json());
 
 //routing for  /decks path
