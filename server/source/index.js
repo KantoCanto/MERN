@@ -29,7 +29,6 @@ app.get("/decks", async (req, res) =>{
   //TODO fetch all decks and send them back to the user
   //1 - how do we fetch the decks from mongo?
   const decks = await Deck.find();
-  console.log(decks);
   //2 - how do we send back the array to the UI
   res.json(decks);
 })
