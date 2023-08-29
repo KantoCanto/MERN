@@ -5,9 +5,9 @@ function App() {
 
   const [title, setTitle] = useState("");
 
-  function handleCreateDeck(e){
+  async function handleCreateDeck(e){
     e.preventDefault();
-    fetch("http://localhost:3000/decks",{
+    await fetch("http://localhost:3000/decks",{
       method: "POST",
       body: JSON.stringify({
         title,
@@ -16,6 +16,7 @@ function App() {
         "Content-Type": "application/json",
       }
     });
+    setTitle("");
   }
 
   return (
