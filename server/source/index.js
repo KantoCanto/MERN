@@ -23,6 +23,17 @@ const app = express();
 app.use(cors("*"));
 app.use(express.json());
 
+
+//endpoint responsible for fetching the created decks and presenting them to the user
+app.get("/decks", async (req, res) =>{
+  //TODO fetch all decks and send them back to the user
+  //1 - how do we fetch the decks from mongo?
+  const decks = await Deck.find();
+  console.log(decks);
+  //2 - how do we send back the array to the UI
+  res.json(decks);
+})
+
 //routing for  /decks path
 app.post("/decks", async (req, res) => {
   //here we want to be able to create a new deck model and persist that onto our database
