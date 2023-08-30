@@ -4,10 +4,39 @@
   padding: 2rem;
   text-align: center;
 }
+.App{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.App form{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
 
 .decks{
   display: grid;
   width: 500px;
-  margin: 0;
-  grid-template-columns: repeat(1, 1fr);
+  margin: 0 auto;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.decks li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  background: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: black;
+}
+
+.decks li:hover{
+  background: #eee;
+  cursor: pointer;
 }
