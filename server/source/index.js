@@ -44,10 +44,16 @@ app.post("/decks", async (req, res) => {
   res.json(createdDeck);
 })
 
-//routing for requests on root path
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+//creting a delete endpoint
+app.delete("/decks/:deckId", async (req,res) => {
+ //TODO:
+ //1. get the deck id from the url
+  const deckId = req.params.deckId;
+ //2. delete the deck from mongo
+  const deck = await Deck.findByIdAndDelete(deckId);
+ //3. return the deleted deck to the user who made the request
+ res.json(deck)
+})
 
 //connection to the specific flashcardproject db
 //mongoose.connect() is a <promise>
