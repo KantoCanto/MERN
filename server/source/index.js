@@ -12,6 +12,7 @@ import express from 'express';
 import { getDecksController } from './controllers/getDecksController.js';
 import { createDeckController } from './controllers/createDeckController.js';
 import { deleteDeckController } from './controllers/deleteDeckController.js';
+import { createCardForDeckController } from './controllers/createCardForDeckController.js';
 
 
 const app = express();
@@ -29,6 +30,9 @@ app.get("/decks", getDecksController)
 app.post("/decks", createDeckController)
 //creting a delete endpoint
 app.delete("/decks/:deckId", deleteDeckController)
+
+//endpoint for creating card in specific deck
+app.post("/decks/:deckId/cards", createCardForDeckController)
 
 //connection to the specific flashcardproject db
 //mongoose.connect() is a <promise>
