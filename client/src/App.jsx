@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
+import { getDecks } from "./api/getDecks";
+import { createDeck } from "./api/createDeck";
+import { deleteDeck } from "./api/deleteDeck";
 
 function App() {
 
@@ -10,25 +13,13 @@ function App() {
 
   async function handleCreateDeck(e){
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/decks",{
-      method: "POST",
-      body: JSON.stringify({
-        title,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-    setTitle("");
-    const deck = await response.json();
+    const deck = await createDeck(title);
     setDecks([...decks, deck]);
     setTitle("");
   }
 
   async function handleDeleteDeck(deckId){
-     await fetch(`http://localhost:3000/decks/${deckId}`, {
-       method: "DELETE",
-     });
+     await deleteDeck(deckId);
      //optimistic uptdates -> goes through the decks array and detele the one that we just manually deleted
      setDecks(decks.filter(deck => deck._id !== deckId));
   }
@@ -36,8 +27,7 @@ function App() {
   useEffect(() => {
    
     async function fetchDeck() {
-      const response = await fetch("http://localhost:3000/decks");
-      const newDecks = await response.json();
+      const newDecks = await getDecks();
       setDecks(newDecks);
     }
 
