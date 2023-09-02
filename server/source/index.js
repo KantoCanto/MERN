@@ -1,20 +1,19 @@
 //handling .env
 import 'dotenv/config';
-
 //variable that holds the port number
 const PORT = 3000;
-
 //importing mongoose
 import mongoose from 'mongoose';
-
 //import cors
 import cors from "cors";
-
-//import the models
-import Deck from "./models/Deck.js";
-
 //importing express and creating app
 import express from 'express';
+//import routes
+import { getDecksController } from './routes/controllers/getDecksController.js';
+import { createDeckController } from './routes/controllers/createDeckController.js';
+import { deleteDeckController } from './routes/controllers/deleteDeckController.js';
+
+
 const app = express();
 
 //express.json() is a middleware function. here we tell express to use this.
@@ -25,35 +24,11 @@ app.use(express.json());
 
 
 //endpoint responsible for fetching the created decks and presenting them to the user
-app.get("/decks", async (req, res) =>{
-  //TODO fetch all decks and send them back to the user
-  //1 - how do we fetch the decks from mongo?
-  const decks = await Deck.find();
-  //2 - how do we send back the array to the UI
-  res.json(decks);
-})
-
+app.get("/decks", getDecksController)
 //routing for  /decks path
-app.post("/decks", async (req, res) => {
-  //here we want to be able to create a new deck model and persist that onto our database
-  const newDeck = new Deck({
-    title: req.body.title,
-  });
-  //this still doesn't communicate to our database, so we need to save it:
-  const createdDeck = await newDeck.save();
-  res.json(createdDeck);
-})
-
+app.post("/decks", createDeckController)
 //creting a delete endpoint
-app.delete("/decks/:deckId", async (req,res) => {
- //TODO:
- //1. get the deck id from the url
-  const deckId = req.params.deckId;
- //2. delete the deck from mongo
-  const deck = await Deck.findByIdAndDelete(deckId);
- //3. return the deleted deck to the user who made the request
- res.json(deck)
-})
+app.delete("/decks/:deckId", deleteDeckController)
 
 //connection to the specific flashcardproject db
 //mongoose.connect() is a <promise>
