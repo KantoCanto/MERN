@@ -1,4 +1,4 @@
-import Deck from "../../models/Deck.js";
+import Deck from "../models/Deck.js";
 
 export async function createDeckController(req, res) {
   //here we want to be able to create a new deck model and persist that onto our database

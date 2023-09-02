@@ -1,4 +1,4 @@
-import Deck from "../../models/Deck.js";
+import Deck from "../models/Deck.js";
 
 export async function getDecksController(req, res) {
   //TODO fetch all decks and send them back to the user

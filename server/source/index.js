@@ -9,9 +9,9 @@ import cors from "cors";
 //importing express and creating app
 import express from 'express';
 //import routes
-import { getDecksController } from './routes/controllers/getDecksController.js';
-import { createDeckController } from './routes/controllers/createDeckController.js';
-import { deleteDeckController } from './routes/controllers/deleteDeckController.js';
+import { getDecksController } from './controllers/getDecksController.js';
+import { createDeckController } from './controllers/createDeckController.js';
+import { deleteDeckController } from './controllers/deleteDeckController.js';
 
 
 const app = express();
