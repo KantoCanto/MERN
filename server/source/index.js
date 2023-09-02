@@ -12,8 +12,9 @@ import express from 'express';
 import { getDecksController } from './controllers/getDecksController.js';
 import { createDeckController } from './controllers/createDeckController.js';
 import { deleteDeckController } from './controllers/deleteDeckController.js';
+import { getDeckController } from './controllers/getDeckController.js';
 import { createCardForDeckController } from './controllers/createCardForDeckController.js';
-
+import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController.js';
 
 const app = express();
 
@@ -25,14 +26,18 @@ app.use(express.json());
 
 
 //endpoint responsible for fetching the created decks and presenting them to the user
-app.get("/decks", getDecksController)
+app.get("/decks", getDecksController);
 //routing for  /decks path
-app.post("/decks", createDeckController)
+app.post("/decks", createDeckController);
 //creting a delete endpoint
-app.delete("/decks/:deckId", deleteDeckController)
+app.delete("/decks/:deckId", deleteDeckController);
 
+//
+app.get("/decks/:deckId", getDeckController);
 //endpoint for creating card in specific deck
-app.post("/decks/:deckId/cards", createCardForDeckController)
+app.post("/decks/:deckId/cards", createCardForDeckController);
+//
+app.delete("/decks/:deckId/cards/:index", deleteCardOnDeckController);
 
 //connection to the specific flashcardproject db
 //mongoose.connect() is a <promise>
